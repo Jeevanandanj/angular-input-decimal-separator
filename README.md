@@ -19,7 +19,7 @@ How to use?
 2. decimal-min used to set the manimum validation for the input.
 3. input-decimal-separator="3" - 3 is the number of decimal separator. 3 is optional parameter.
 
-Impressed by [https://github.com/assisrafael/angular-input-masks](https://github.com/assisrafael/angular-input-masks)
+Inspired by [https://github.com/assisrafael/angular-input-masks](https://github.com/assisrafael/angular-input-masks)
 
 
 
