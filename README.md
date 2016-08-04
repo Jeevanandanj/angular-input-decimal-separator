@@ -17,9 +17,10 @@ How to use?
 ```
 1. decimal-max used to set the maximum validation for the input.
 2. decimal-min used to set the manimum validation for the input.
-3. input-decimal-separator="3" - 3 is the number of decimal separator. 3 is optional parameter.
+3. input-decimal-separator="3" - 3 is the number of decimal separator. 3 is optional parameter. By default, 2 will be the number of decimal separator.
+4. Supports negative number.
 
-Inspired by [https://github.com/assisrafael/angular-input-masks](https://github.com/assisrafael/angular-input-masks)
+
 
 
 
