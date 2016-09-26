@@ -62,16 +62,17 @@ angular.module('ng-inputdecimalseparator', [])
 
                             result = tokens.join($locale.NUMBER_FORMATS.DECIMAL_SEP);
                         }
-
+						if (isMinusExists)
+						{
+						  result = minus + result;
+						  actualNumber = minus + actualNumber;
+						}
                         if (result != value) {
-                            if (isMinusExists)
-                                result = minus + result;
+                           
                             ctrl.$setViewValue(result);
                             ctrl.$render();
                         }
 
-                        if (isMinusExists)
-                            actualNumber = minus + actualNumber;
                         return actualNumber;
 
                     }); // end Parser
