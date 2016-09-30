@@ -10,12 +10,11 @@ angular.module('ng-inputdecimalseparator', [])
                     if (!ctrl) {
                         return;
                     }
-
                     var decimalDelimiter = $locale.NUMBER_FORMATS.DECIMAL_SEP,
                            thousandsDelimiter = $locale.NUMBER_FORMATS.GROUP_SEP,
                            defaultDelimiter = ".";
-                    var decimalMax = isNaN(attrs.decimalMax) ? null : parseFloat(attrs.decimalMax);
-                    var decimalMin = isNaN(attrs.decimalMin) ? null : parseFloat(attrs.decimalMin);
+                    var decimalMax = isNaN(attrs.decimalMax) || attrs.decimalMax === "" ? null : parseFloat(attrs.decimalMax);
+                    var decimalMin = isNaN(attrs.decimalMin) || attrs.decimalMin === "" ? null : parseFloat(attrs.decimalMin);
                     var noOfDecimal = null, minus = "-", isMinusExists = false;
 
                     if (noOfDecimal || noOfDecimal != '') {
@@ -25,6 +24,7 @@ angular.module('ng-inputdecimalseparator', [])
 
                     // Parser starts here...
                     ctrl.$parsers.push(function (value) {
+
                         if (!value || value === '') {
                             return null;
                         }
@@ -35,7 +35,9 @@ angular.module('ng-inputdecimalseparator', [])
                         var regularExpression = new RegExp(str, 'g');
 
                         var outputValue = value.replace(regularExpression, '');
-
+                        if (!outputValue || outputValue === '') {
+                            return null;
+                        }
                         var tokens = outputValue.split(decimalDelimiter);
                         tokens.splice(2, tokens.length - 2);
 
@@ -44,14 +46,17 @@ angular.module('ng-inputdecimalseparator', [])
 
                         var result = tokens.join(decimalDelimiter);
                         var actualNumber = tokens.join(defaultDelimiter);
+                        if (isMinusExists) {
 
+                            actualNumber = minus + actualNumber;
+                        }
                         ctrl.$setValidity('max', true);
                         ctrl.$setValidity('min', true);
 
-                        if (decimalMax && Number(actualNumber) > decimalMax)
+                        if (decimalMax && (actualNumber * 1) > decimalMax)
                             ctrl.$setValidity('max', false);
 
-                        if (decimalMin && Number(actualNumber) < decimalMin)
+                        if (decimalMin && (actualNumber * 1) < decimalMin)
                             ctrl.$setValidity('min', false);
 
                         // apply thousand separator
@@ -62,13 +67,12 @@ angular.module('ng-inputdecimalseparator', [])
 
                             result = tokens.join($locale.NUMBER_FORMATS.DECIMAL_SEP);
                         }
-						if (isMinusExists)
-						{
-						  result = minus + result;
-						  actualNumber = minus + actualNumber;
-						}
+                        if (isMinusExists) {
+                            result = minus + result;
+
+                        }
                         if (result != value) {
-                           
+
                             ctrl.$setViewValue(result);
                             ctrl.$render();
                         }
@@ -83,11 +87,15 @@ angular.module('ng-inputdecimalseparator', [])
                         if (!value || value === '') {
                             return null;
                         }
+
                         var str = "[^0-9" + decimalDelimiter + "]";
                         var regularExpression = new RegExp(str, 'g');
                         value = value.toString();
                         var isMinusExists = value.indexOf(minus) == 0;
                         value = value.replace(regularExpression, '');
+                        if (!value || value === '') {
+                            value = "0";
+                        }
                         var tokens = value.split(defaultDelimiter);
                         tokens.splice(2, tokens.length - 2);
 
@@ -121,4 +129,3 @@ angular.module('ng-inputdecimalseparator', [])
         };
     }
     ]);
-
