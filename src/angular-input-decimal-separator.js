@@ -10,17 +10,21 @@ angular.module('ng-inputdecimalseparator', [])
                     if (!ctrl) {
                         return;
                     }
+                    debugger  
                     var decimalDelimiter = $locale.NUMBER_FORMATS.DECIMAL_SEP,
                            thousandsDelimiter = $locale.NUMBER_FORMATS.GROUP_SEP,
                            defaultDelimiter = ".";
                     var decimalMax = isNaN(attrs.decimalMax) || attrs.decimalMax === "" ? null : parseFloat(attrs.decimalMax);
                     var decimalMin = isNaN(attrs.decimalMin) || attrs.decimalMin === "" ? null : parseFloat(attrs.decimalMin);
-                    var noOfDecimal = null, minus = "-", isMinusExists = false;
+                    var noOfDecimal = 2, minus = "-", isMinusExists = false;
 
-                    if (noOfDecimal || noOfDecimal != '') {
+                    if (attrs.inputDecimalSeparator || attrs.inputDecimalSeparator != '') {
                         noOfDecimal = isNaN(attrs.inputDecimalSeparator) ? 2 : Number(attrs.inputDecimalSeparator);
                         noOfDecimal = Math.floor(noOfDecimal);
                     }
+                    
+                    if(attrs.applyThousandDelimiter==='false')
+                    thousandsDelimiter="";
 
                     // Parser starts here...
                     ctrl.$parsers.push(function (value) {
@@ -63,7 +67,7 @@ angular.module('ng-inputdecimalseparator', [])
                         if (result) {
                             tokens = result.split($locale.NUMBER_FORMATS.DECIMAL_SEP);
                             if (tokens[0])
-                                tokens[0] = tokens[0].split(/(?=(?:...)*$)/).join($locale.NUMBER_FORMATS.GROUP_SEP);
+                                tokens[0] = tokens[0].split(/(?=(?:...)*$)/).join(thousandsDelimiter);
 
                             result = tokens.join($locale.NUMBER_FORMATS.DECIMAL_SEP);
                         }
@@ -115,7 +119,7 @@ angular.module('ng-inputdecimalseparator', [])
                         if (result) {
                             tokens = result.split($locale.NUMBER_FORMATS.DECIMAL_SEP);
                             if (tokens[0])
-                                tokens[0] = tokens[0].split(/(?=(?:...)*$)/).join($locale.NUMBER_FORMATS.GROUP_SEP);
+                                tokens[0] = tokens[0].split(/(?=(?:...)*$)/).join(thousandsDelimiter);
 
                             result = tokens.join($locale.NUMBER_FORMATS.DECIMAL_SEP);
 
