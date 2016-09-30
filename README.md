@@ -19,6 +19,7 @@ How to use?
 2. decimal-min used to set the manimum validation for the input.
 3. input-decimal-separator="3" - 3 is the number of decimal separator. 3 is optional parameter. By default, 2 will be the number of decimal separator.
 4. Supports negative number.
+4. Thousand separator can be enabled and disabled by the user. By default the thousand separtor wil be enabled. If user wants to force to disable, apply the attribute as apply-thousand-delimiter="false"
 
 
 
