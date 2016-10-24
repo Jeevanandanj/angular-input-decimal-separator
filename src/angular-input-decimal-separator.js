@@ -5,7 +5,6 @@
  * You are free to use/update/modify. No hidden terms and conditions.
  */
 
-/* commonjs package manager support (eg componentjs) */
 angular.module('ng-inputdecimalseparator', [])
     .directive('inputDecimalSeparator', [
     '$locale',
