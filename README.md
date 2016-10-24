@@ -22,6 +22,8 @@ How to use?
 4. Thousand separator can be enabled and disabled by the user. By default the thousand separtor wil be enabled. If user wants to force to disable, apply the attribute as apply-thousand-delimiter="false"
 
 
+You are free to use/update/modify. No hidden terms and conditions.
+
 
 
 
