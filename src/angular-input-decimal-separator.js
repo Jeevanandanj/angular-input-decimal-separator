@@ -17,7 +17,7 @@ angular.module('ng-inputdecimalseparator', [])
                     if (!ctrl) {
                         return;
                     }
-                    debugger  
+
                     var decimalDelimiter = $locale.NUMBER_FORMATS.DECIMAL_SEP,
                            thousandsDelimiter = $locale.NUMBER_FORMATS.GROUP_SEP,
                            defaultDelimiter = ".";
