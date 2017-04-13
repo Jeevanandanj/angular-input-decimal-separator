@@ -1,10 +1,3 @@
-/**
- * Decimal and thousand separator for the input box.
- * @version v1.2
- * @link https://github.com/Jeevanandanj/angular-input-decimal-separator
- * You are free to use/update/modify. No hidden terms and conditions.
- */
-
 angular.module('ng-inputdecimalseparator', [])
     .directive('inputDecimalSeparator', [
     '$locale',
@@ -29,9 +22,9 @@ angular.module('ng-inputdecimalseparator', [])
                         noOfDecimal = isNaN(attrs.inputDecimalSeparator) ? 2 : Number(attrs.inputDecimalSeparator);
                         noOfDecimal = Math.floor(noOfDecimal);
                     }
-                    
-                    if(attrs.applyThousandDelimiter==='false')
-                    thousandsDelimiter="";
+
+                    if (attrs.applyThousandDelimiter === 'false')
+                        thousandsDelimiter = "";
 
                     // Parser starts here...
                     ctrl.$parsers.push(function (value) {
@@ -55,12 +48,12 @@ angular.module('ng-inputdecimalseparator', [])
                         if (noOfDecimal && tokens[1])
                             tokens[1] = tokens[1].substring(0, noOfDecimal);
 
-                        var result = tokens.join(decimalDelimiter);
+                        var result = noOfDecimal > 0 ? tokens.join(decimalDelimiter) : tokens[0];
                         var actualNumber = tokens.join(defaultDelimiter);
                         if (isMinusExists) {
-
                             actualNumber = minus + actualNumber;
                         }
+
                         ctrl.$setValidity('max', true);
                         ctrl.$setValidity('min', true);
 
@@ -113,7 +106,8 @@ angular.module('ng-inputdecimalseparator', [])
                         if (noOfDecimal && tokens[1])
                             tokens[1] = tokens[1].substring(0, noOfDecimal);
 
-                        var result = tokens.join(decimalDelimiter);
+                        //var result = tokens.join(decimalDelimiter);
+                        var result = noOfDecimal > 0 ? tokens.join(decimalDelimiter) : tokens[0];
                         var actualNumber = Number(tokens.join(defaultDelimiter));
 
                         if (decimalMax && actualNumber > decimalMax)
