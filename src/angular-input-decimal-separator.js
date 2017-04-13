@@ -1,3 +1,9 @@
+/**		
+ - * Decimal and thousand separator for the input box.		
+ - * @version v1.2		
+ - * @link https://github.com/Jeevanandanj/angular-input-decimal-separator		
+ - * You are free to use/update/modify. No hidden terms and conditions.		
+ - */
 angular.module('ng-inputdecimalseparator', [])
     .directive('inputDecimalSeparator', [
     '$locale',
