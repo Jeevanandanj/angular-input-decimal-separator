@@ -46,6 +46,8 @@ angular.module('ng-inputdecimalseparator', [])
 
                         var outputValue = value.replace(regularExpression, '');
                         if (!outputValue || outputValue === '') {
+							ctrl.$setViewValue('');
+                            ctrl.$render();
                             return null;
                         }
                         var tokens = outputValue.split(decimalDelimiter);
